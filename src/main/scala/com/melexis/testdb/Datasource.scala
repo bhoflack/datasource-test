@@ -29,18 +29,11 @@ object Datasource {
                            VALUES (?, ?, ?, ?)""").
                 setConsistencyLevel(ConsistencyLevel.LOCAL_QUORUM)
 
-        println("Start writing dies")
-        
         val now = System.nanoTime
 
-        val futures = for (
+        for (
             (test, coordinates) <- values;
             (coordinate, value) <- coordinates
         ) yield session.executeAsync(insertStmt.bind(id, test, coordinate, value))
-
-        futures.foreach { future => future.getUninterruptibly }
-
-        val micros = (System.nanoTime - now) / 1000
-        println("Wrote the data in %d microseconds.".format(micros))
     }
 }

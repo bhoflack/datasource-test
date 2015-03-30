@@ -10,4 +10,4 @@ libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "2.2.4")
 
 fork := true
-javaOptions ++= Seq("-Xms2048M", "-Xmx2048M", "-XX:+CMSClassUnloadingEnabled")
+javaOptions ++= Seq("-Xms4G", "-Xmx4G", "-XX:+CMSClassUnloadingEnabled")
