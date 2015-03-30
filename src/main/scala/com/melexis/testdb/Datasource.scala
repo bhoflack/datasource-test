@@ -18,7 +18,7 @@ object Datasource {
     }
 
     def dropSchema(session: Session) = {
-        session.execute("""DROP TABLE testlog""")
+        session.execute("""DROP TABLE testlog IF EXISTS""")
     }
 
     def write(session: Session,
@@ -27,7 +27,7 @@ object Datasource {
         val insertStmt = session.
                 prepare("""INSERT INTO testlog (id, test, coordinate, value) 
                            VALUES (?, ?, ?, ?)""").
-                setConsistencyLevel(ConsistencyLevel.ONE)
+                setConsistencyLevel(ConsistencyLevel.LOCAL_QUORUM)
 
         println("Start writing dies")
         
